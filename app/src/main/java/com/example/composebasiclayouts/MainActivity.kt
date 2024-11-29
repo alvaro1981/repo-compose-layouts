@@ -200,6 +200,7 @@ fun FavoriteCollectionsGrid(
     LazyHorizontalGrid(
         rows = GridCells.Fixed(2),
         contentPadding = PaddingValues(horizontal = 16.dp),
+        // modifier = modifier.padding(32.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier.height(168.dp)
@@ -247,7 +248,12 @@ fun HomeSection(
 ) {
     Column(modifier) {
         Text(
-            text = stringResource(title))
+            text = stringResource(title),
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier
+                .paddingFromBaseline(top = 40.dp, bottom = 16.dp)
+                .padding(horizontal = 16.dp)
+        )
         content()
     }
 }
@@ -260,4 +266,26 @@ fun HomeSectionPreview() {
             AlignYourBodyRow()
         }
     }
+}
+
+
+@Composable
+fun HomeScreen(modifier: Modifier = Modifier){
+    Column(modifier) {
+        //Spacer(Modifier.height(16.dp))
+        SearchBar(Modifier.padding(horizontal = 16.dp))
+        HomeSection(title = R.string.align_your_body) {
+            AlignYourBodyRow()
+        }
+        HomeSection(title = R.string.favorite_collections) {
+            FavoriteCollectionsGrid()
+        }
+
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+@Composable
+fun ScreenContentPreview() {
+    ComposeBasicLayoutsTheme  { HomeScreen() }
 }
